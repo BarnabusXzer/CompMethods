@@ -1,27 +1,23 @@
 def ArraySumOdd(vals):
-    odd = []
     response = 0
     for i in vals:
         if i % 2 == 1:
             response = response + i
     return response
 
-
 def MatrixProductLargerThan(matrixA, val):
-    nums = []
     response = 1
-    for row in matrixA:
-        for i in row:
-            if i > val:
-                response = response * i
+    for i in matrixA:
+        for j in i:
+            if j > val:
+                response = response * j
     return response
-
 
 def polyval(x, coeffs):
     power = 0
     response = 0
     for i in coeffs:
-        response = response + (i * (x ** power ))
+        response = response + (i * (x ** power))
         power = power + 1 
     return response
 
@@ -75,6 +71,5 @@ def main():
     row, col = location_of_largest(mymatrix2)
     val = mymatrix2[row][col]
     print('part d) ',val,row,col  )
-
 
 main()

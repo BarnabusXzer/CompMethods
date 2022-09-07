@@ -6,7 +6,7 @@ def Simpson(func, a, b, npoints = 35):
         npoints = npoints + 1
 
     response = 0
-    h = (b - a)/npoints
+    h = (b - a) / npoints
     for i in range(npoints + 1):
         x = a + h * i
         if (i == 0):

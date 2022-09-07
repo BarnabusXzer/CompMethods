@@ -18,7 +18,7 @@ def polyval(x, coeffs):
     response = 0
     for i in coeffs:
         response = response + (i * (x ** power))
-        power = power + 1 
+        power = power + 1
     return response
 
 def location_of_largest(matrixA):

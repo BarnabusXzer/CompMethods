@@ -1,4 +1,3 @@
-import math
 import functions
 
 def Simpson(func, a, b, npoints = 35):

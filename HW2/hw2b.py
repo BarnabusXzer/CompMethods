@@ -18,21 +18,21 @@ def Secant(func, x0, x1, maxiter=15, xtol=0.0001):
 
 def main():
 
-    func = functions.Function1
+    func = functions.Function1 # REPLACE WITH THE FUNCTION/EQUATION YOU WANT TO ESTIMATE
     x0 = 1
     x1 = 2
     maxiter = 5
     xtol = 0.0001
     print(Secant(func, x0, x1, maxiter, xtol))
 
-    func = functions.Function2
+    func = functions.Function2 # REPLACE WITH THE FUNCTION/EQUATION YOU WANT TO ESTIMATE
     x0 = 1
     x1 = 2
     maxiter = 15
     xtol = 0.00000001
     print(Secant(func, x0, x1, maxiter, xtol))
 
-    func = functions.Function2
+    func = functions.Function3 # REPLACE WITH THE FUNCTION/EQUATION YOU WANT TO ESTIMATE
     x0 = 1
     x1 = 2
     maxiter = 3

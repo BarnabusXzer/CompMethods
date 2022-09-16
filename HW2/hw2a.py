@@ -21,19 +21,19 @@ def Simpson(func, a, b, npoints = 35):
 
 def main():
     
-    func = functions.Function1
+    func = functions.Function1 # REPLACE WITH THE FUNCTION/EQUATION YOU WANT TO ESTIMATE 
     a = 1
     b = 3
     npoints = 10
     print(Simpson(func, a, b, npoints))
 
-    func = functions.Function2
+    func = functions.Function2 # REPLACE WITH THE FUNCTION/EQUATION YOU WANT TO ESTIMATE
     a = 2
     b = 3 
     npoints = 23
     print(Simpson(func, a, b, npoints))
 
-    func = functions.Function3
+    func = functions.Function3 # REPLACE WITH THE FUNCTION/EQUATION YOU WANT TO ESTIMATE
     a = 2
     b = 3
     print(Simpson(func, a, b))

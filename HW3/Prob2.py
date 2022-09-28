@@ -1,4 +1,6 @@
 import math
+import numpy as np
+import matplotlib.pyplot as plt
 
 def Simpson(func, a, b, npoints = 99):
 
@@ -62,5 +64,15 @@ def main():
 
     DesignStress = 25000
     print(f'Design-Stress:{DesignStress: .2f}\nWing Section Modulus:{DesignTheSpar(DesignStress): .2f}\n')
+
+
+    x = np.linspace(.000001,10)
+    y = SigmaMax(x)
+    plt.plot(x,y)
+    plt.xlim(0,10)
+    plt.xlabel('Wing Section Modulus')
+    plt.ylim(0,50000)
+    plt.ylabel('Design Stress')
+    plt.show()
 
 main()

@@ -1,4 +1,6 @@
 import math
+import numpy as np
+import matplotlib.pyplot as plt
 
 def Simpson(func, a, b, npoints = 99):
 
@@ -60,7 +62,6 @@ def ThrustNeededForTakeoff(distance):
 
     thrust = Secant(func, 950, 1550)
     return thrust
-
         
 def main():
 
@@ -72,5 +73,14 @@ def main():
 
     distance = 1000
     print(f'The Required Thrust To Takeoff In {distance} Feet: {ThrustNeededForTakeoff(distance): .2f} Pounds')
+
+    x = np.linspace(.000001,30000)
+    y = STO(x)
+    plt.plot(x,y)
+    plt.xlim(0,30000)
+    plt.xlabel('Thrust - Pounds')
+    plt.ylim(0,6000)
+    plt.ylabel('Takeoff Distance -Feet')
+    plt.show()
 
 main()

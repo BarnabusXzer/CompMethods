@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 def Simpson(func, a, b, npoints = 99):
 
     if not (npoints % 2 == 1):
@@ -27,9 +30,13 @@ def Secant(func, x0, x1, maxiter=99, xtol=0.0001):
         x = xf - ((xi - xf) / (func(xi) - func(xf))) * func(xf)
         xi = xf
         xf = x
+        print("2" + str(func(xi)) + str(func(xf)))
+        print(xi, xf)
+        print(abs(xi - xf))
+        print(x)
         if abs(xi - xf) < xtol:  
             return x        
-    
+ 
     return x
 
 def Time(wspec):
@@ -43,32 +50,50 @@ def Time(wspec):
     cv = (kt * va) / (ra * irotor)
     cw = ((c * ra) + (kt ** 2)) / (ra * irotor)
 
+    if type(wspec) == int or type(wspec) == float:
+        if wspec > (0.999999 * wss):
+            return -1
+    else:
+        if any(wspec) > (0.999999 * wss):
+            return -1
+
     def func(x):
         return (1 / (cv - cw))
 
-    time = Simpson(func, 0, wspec)
-    
-    if time > (0.999999 * wss):
-        return -1
-    else: 
-        return time, wss
+    time = (Simpson(func, 0, wspec))
+    return time
 
 def Speed(tspec):
     
     def func(x):
-        return (Time(x)[0] - tspec)
+        return (Time(x) - tspec)
 
-    speed = Secant(func, -2, 350)
+    speed = Secant(func, 275, 325)
     return speed
 
 def main():
-    
-    print(f'The Steady-State Motor Speed is {Time(0)[1]: .2f} radians/second')
+
+    va = 115
+    kt = .366
+    ra = 2.11
+    c = 0.002792
+    wss = (kt * va) / ((kt ** 2) + (ra * c))
+
+    print(f'The Steady-State Motor Speed is{wss: .2f} radians/second')
 
     wspec = 280
-    print(f'The Motor Needs{Time(wspec)[0]: .3f} seconds To Reach{wspec: .0f} radians/second')
+    print(f'The Motor Needs{Time(wspec): .3f} seconds To Reach{wspec: .0f} radians/second')
 
     tspec = 0.35
-    print(f'The Motor Will Reach {Speed(tspec): .2f} radians/second at {tspec: .2f} seconds')
+    # print(f'The Motor Will Reach{Speed(tspec): .2f} radians/second at{tspec: .2f} seconds')
+
+    x = np.linspace(.000001,300)
+    y = Time(x)
+    plt.plot(x,y)
+    plt.xlim(0,300)
+    plt.xlabel('Speed - radians/second')
+    plt.ylim(0,0.3)
+    plt.ylabel('Time - seconds')
+    plt.show()
 
 main()

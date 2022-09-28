@@ -1,5 +1,4 @@
 import math
-from urllib import response
 
 def Simpson(func, a, b, npoints = 99):
 
@@ -20,7 +19,7 @@ def Simpson(func, a, b, npoints = 99):
 
     return response
 
-def Secant(func, x0, x1, maxiter=49, xtol=0.0001):
+def Secant(func, x0, x1, maxiter=99, xtol=0.0001):
 
     x = 0
     xi = x0
@@ -55,18 +54,12 @@ def STO(thrust):
     return sto
 
 def ThrustNeededForTakeoff(distance):
-    w = 56000
-    s = 1000
-    clmax = 2.4
-    cd = 0.0279
-    rho = 0.002377
-    gc = 32.2
 
     def func(x):
         return STO(x) - distance
 
-    root = Secant(func, 950, 1550)
-    return root
+    thrust = Secant(func, 950, 1550)
+    return thrust
 
         
 def main():

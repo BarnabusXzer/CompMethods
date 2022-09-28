@@ -1,4 +1,3 @@
-
 import math
 
 def Simpson(func, a, b, npoints = 99):
@@ -30,8 +29,8 @@ def Secant(func, x0, x1, maxiter=99, xtol=0.0001):
         x = xf - ((xi - xf) / (func(xi) - func(xf))) * func(xf)
         xi = xf
         xf = x
-        if abs(xi - xf) < xtol:
-            return x
+        if abs(xi - xf) < xtol:  
+            return x        
     
     return x
 
@@ -47,7 +46,12 @@ def SigmaMax(z):
     return sigmamax
 
 def DesignTheSpar(DesignStress):
-    pass
+    
+    def func(x):
+        return SigmaMax(x) - DesignStress
+
+    z = Secant(func, .001, 10)
+    return z
 
 def main():
     z = 3.5

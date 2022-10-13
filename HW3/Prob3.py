@@ -27,7 +27,7 @@ def Secant(func, x0, x1, maxiter=99, xtol=0.0001):
     xf = x0 + ((x1 - x0) / maxiter)
 
     for i in range(maxiter):
-        x = xf - ((xi - xf) / (func(xi) - func(xf))) * func(xf)
+        x = (xf - ((xi - xf) / (func(xi) - func(xf))) * func(xf))
         xi = xf
         xf = x
         print("2" + str(func(xi)) + str(func(xf)))
@@ -68,7 +68,7 @@ def Speed(tspec):
     def func(x):
         return (Time(x) - tspec)
 
-    speed = Secant(func, 275, 325)
+    speed = Secant(func, -2, 350)
     return speed
 
 def main():
@@ -85,7 +85,7 @@ def main():
     print(f'The Motor Needs{Time(wspec): .3f} seconds To Reach{wspec: .0f} radians/second')
 
     tspec = 0.35
-    # print(f'The Motor Will Reach{Speed(tspec): .2f} radians/second at{tspec: .2f} seconds')
+    print(f'The Motor Will Reach{Speed(tspec): .2f} radians/second at{tspec: .2f} seconds')
 
     x = np.linspace(.000001,300)
     y = Time(x)

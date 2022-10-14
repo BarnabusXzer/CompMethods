@@ -1,4 +1,3 @@
-from wsgiref.util import request_uri
 from scipy.optimize import fsolve
 
 def solveSystem():

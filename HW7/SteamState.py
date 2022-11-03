@@ -147,4 +147,3 @@ class SteamState:
 
         if self.v is None:
             self.v = self.calcSpecificVolume()
-

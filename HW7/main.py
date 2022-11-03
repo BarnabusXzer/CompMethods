@@ -10,20 +10,21 @@ ui = qt5.Ui_Window1()
 ui.setupUi(Window1)
 
 def setOutput(args):
-    ui.txtDisplay1.setText(str(args[0]))
-    ui.txtDisplay2.setText(str(args[1]))
-    ui.txtDisplay3.setText(str(args[2]))
-    ui.txtDisplay4.setText(str(args[3]))
-    ui.txtDisplay5.setText(str(args[4]))
-    ui.txtDisplay6.setText(str(args[5]))
-    ui.txtDisplay7.setText(str(args[6]))
-    ui.txtDisplay8.setText(str(args[7]))
+    ui.txtDisplay1.setText(f'{args[0]:.2f}')
+    ui.txtDisplay2.setText(f'{args[1]:.2f}')
+    ui.txtDisplay3.setText(f'{args[2]:.2f}')
+    ui.txtDisplay4.setText(f'{args[3]:.2f}')
+    ui.txtDisplay5.setText(f'{args[4]:.2f}')
+    ui.txtDisplay6.setText(f'{args[5]:.2f}')
+    ui.txtDisplay7.setText(f'{args[6]:.2f}')
+    ui.txtDisplay8.setText(f'{args[7]:.2f}')
 
 def calc():
 
     # DEFINING INPUTS 
-    pressure_high = float(ui.txtInput1.text())
-    pressure_low = float(ui.txtInput2.text())
+    pressure_low = float(ui.txtInput1.text())
+    pressure_high = float(ui.txtInput2.text())
+
     temp_high_bool = False
     temp_high = None
 
@@ -54,7 +55,8 @@ def calc():
     # CALCULATE PROPERTIES FOR STATE #4
     state4 = SteamState(pressure_high, 'Pump Exit')
     state4.x = 0.0
-    state4.calc()
+    # STATE #4 IS ALWASYS SUBCOOLED SO WE CANNOT USE state4.calc()
+    state4.h = state3.h + (state3.v * (state4.p - state3.p)) # state4.calc() CANNOT CALCULATE VALUES IN THE SUBCOOLED REGION
 
     # CALCULATE OUTPUTE VALUES
     turbine_work = state1.h - state2.h

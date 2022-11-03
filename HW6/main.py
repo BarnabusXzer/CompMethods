@@ -1,5 +1,4 @@
 from SteamState import SteamState 
-import pandas as pd
  
 def main(): 
     inlet = SteamState(8000, 'Turbine Inlet') 

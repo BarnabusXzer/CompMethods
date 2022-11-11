@@ -41,7 +41,6 @@ def calc():
     else:
         state1.x = 1.0
     state1.calc()
-    
     # CALCULATE PROPERTIES FOR STATE #2
     state2 = SteamState(pressure_low, 'Turbine Exit')
     state2.s = state1.s

@@ -1,6 +1,8 @@
+
 from PyQt5 import QtCore, QtWidgets
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -49,7 +51,7 @@ class Ui_Dialog(object):
         self.lblEquation.setGeometry(QtCore.QRect(30, 40, 61, 31))
         self.lblEquation.setObjectName("lblEquation")
         self.txtEquation = QtWidgets.QLineEdit(self.groupOutput)
-        self.txtEquation.setGeometry(QtCore.QRect(90, 40, 561, 31))
+        self.txtEquation.setGeometry(QtCore.QRect(90, 40, 541, 31))
         self.txtEquation.setReadOnly(True)
         self.txtEquation.setObjectName("txtEquation")
         self.graphicsView = QtWidgets.QGraphicsView(self.groupOutput)
@@ -61,7 +63,7 @@ class Ui_Dialog(object):
         self.txtR.setReadOnly(True)
         self.txtR.setObjectName("txtR")
         self.lblR = QtWidgets.QLabel(self.groupOutput)
-        self.lblR.setGeometry(QtCore.QRect(670, 40, 21, 31))
+        self.lblR.setGeometry(QtCore.QRect(650, 40, 31, 31))
         self.lblR.setObjectName("lblR")
         self.btnCalc = QtWidgets.QPushButton(Dialog)
         self.btnCalc.setGeometry(QtCore.QRect(340, 160, 221, 28))
@@ -83,10 +85,10 @@ class Ui_Dialog(object):
         self.rbtnQuad.setText(_translate("Dialog", "Quadratic Fit"))
         self.rbtnCubic.setText(_translate("Dialog", "Cubic Fit"))
         self.rbtnExp.setText(_translate("Dialog", "Exponential Fit"))
-        self.rbtnAll.setText(_translate("Dialog", "All Three"))
+        self.rbtnAll.setText(_translate("Dialog", "All Four"))
         self.groupOutput.setTitle(_translate("Dialog", "Output"))
         self.lblEquation.setText(_translate("Dialog", "Equation:"))
-        self.lblR.setText(_translate("Dialog", "R:"))
+        self.lblR.setText(_translate("Dialog", "R^2:"))
         self.btnCalc.setText(_translate("Dialog", "Calculate"))
         self.btnExit.setText(_translate("Dialog", "Exit"))
 
@@ -97,3 +99,4 @@ class PlotCanvas(FigureCanvas):
         fig = Figure(figsize=(width, height), dpi=dpi)
         FigureCanvas.__init__(self, fig)
         self.setParent(parent)
+

@@ -108,7 +108,7 @@
      <item>
       <widget class="QRadioButton" name="rbtnAll">
        <property name="text">
-        <string>All Three</string>
+        <string>All Four</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -148,7 +148,7 @@
      <rect>
       <x>90</x>
       <y>40</y>
-      <width>561</width>
+      <width>541</width>
       <height>31</height>
      </rect>
     </property>
@@ -185,14 +185,14 @@
    <widget class="QLabel" name="lblR">
     <property name="geometry">
      <rect>
-      <x>670</x>
+      <x>650</x>
       <y>40</y>
-      <width>21</width>
+      <width>31</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>R:</string>
+     <string>R^2:</string>
     </property>
    </widget>
   </widget>

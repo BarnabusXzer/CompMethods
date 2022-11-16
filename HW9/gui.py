@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'HW8.ui'
+# Form implementation generated from reading ui file 'HW9.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.7
 #
@@ -9,13 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QFileDialog, QVBoxLayout
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-import matplotlib.pyplot as plt
+
 
 class Ui_Dialog(object):
-
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(900, 800)
@@ -24,7 +20,7 @@ class Ui_Dialog(object):
         self.groupInput.setObjectName("groupInput")
         self.txtFileName = QtWidgets.QLineEdit(self.groupInput)
         self.txtFileName.setGeometry(QtCore.QRect(100, 40, 631, 31))
-        self.txtFileName.setReadOnly(True)
+        self.txtFileName.setReadOnly(False)
         self.txtFileName.setObjectName("txtFileName")
         self.lblFilename = QtWidgets.QLabel(self.groupInput)
         self.lblFilename.setGeometry(QtCore.QRect(30, 40, 61, 31))
@@ -32,22 +28,26 @@ class Ui_Dialog(object):
         self.btnSelect = QtWidgets.QPushButton(self.groupInput)
         self.btnSelect.setGeometry(QtCore.QRect(740, 40, 93, 31))
         self.btnSelect.setObjectName("btnSelect")
-        self.widget = QtWidgets.QWidget(self.groupInput)
-        self.widget.setGeometry(QtCore.QRect(30, 80, 801, 22))
-        self.widget.setObjectName("widget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
+        self.layoutWidget = QtWidgets.QWidget(self.groupInput)
+        self.layoutWidget.setGeometry(QtCore.QRect(30, 80, 801, 22))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.rbtnLin = QtWidgets.QRadioButton(self.widget)
+        self.rbtnLin = QtWidgets.QRadioButton(self.layoutWidget)
         self.rbtnLin.setObjectName("rbtnLin")
         self.horizontalLayout.addWidget(self.rbtnLin)
-        self.rbtnQuad = QtWidgets.QRadioButton(self.widget)
+        self.rbtnQuad = QtWidgets.QRadioButton(self.layoutWidget)
         self.rbtnQuad.setObjectName("rbtnQuad")
         self.horizontalLayout.addWidget(self.rbtnQuad)
-        self.rbtnCubic = QtWidgets.QRadioButton(self.widget)
+        self.rbtnCubic = QtWidgets.QRadioButton(self.layoutWidget)
         self.rbtnCubic.setObjectName("rbtnCubic")
         self.horizontalLayout.addWidget(self.rbtnCubic)
-        self.rbtnAll = QtWidgets.QRadioButton(self.widget)
+        self.rbtnExp = QtWidgets.QRadioButton(self.layoutWidget)
+        self.rbtnExp.setChecked(False)
+        self.rbtnExp.setObjectName("rbtnExp")
+        self.horizontalLayout.addWidget(self.rbtnExp)
+        self.rbtnAll = QtWidgets.QRadioButton(self.layoutWidget)
         self.rbtnAll.setChecked(True)
         self.rbtnAll.setObjectName("rbtnAll")
         self.horizontalLayout.addWidget(self.rbtnAll)
@@ -66,11 +66,13 @@ class Ui_Dialog(object):
         self.graphicsView.setObjectName("graphicsView")
         self.btnCalc = QtWidgets.QPushButton(Dialog)
         self.btnCalc.setGeometry(QtCore.QRect(340, 160, 221, 28))
-        self.btnCalc.setObjectName("pushButton")
+        self.btnCalc.setObjectName("btnCalc")
         self.btnExit = QtWidgets.QPushButton(Dialog)
         self.btnExit.setGeometry(QtCore.QRect(340, 750, 221, 28))
         self.btnExit.setObjectName("btnExit")
+
         self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -81,8 +83,19 @@ class Ui_Dialog(object):
         self.rbtnLin.setText(_translate("Dialog", "Linear Fit"))
         self.rbtnQuad.setText(_translate("Dialog", "Quadratic Fit"))
         self.rbtnCubic.setText(_translate("Dialog", "Cubic Fit"))
+        self.rbtnExp.setText(_translate("Dialog", "Exponential Fit"))
         self.rbtnAll.setText(_translate("Dialog", "All Three"))
         self.groupOutput.setTitle(_translate("Dialog", "Output"))
         self.lblEquation.setText(_translate("Dialog", "Equation:"))
         self.btnCalc.setText(_translate("Dialog", "Calculate"))
         self.btnExit.setText(_translate("Dialog", "Exit"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())

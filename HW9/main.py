@@ -1,16 +1,18 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog
-import gui as qt5
+from scipy.optimize import minimize
 import matplotlib.pyplot as plt
-import sys
 import pandas as pd
 import numpy as np
+import sys
+import gui
 
 # INITIALIZING GUI
 app = QtWidgets.QApplication(sys.argv)
 Window1 = QtWidgets.QDialog()
-ui = qt5.Ui_Dialog()
+ui = gui.Ui_Dialog()
 ui.setupUi(Window1)
+plot = gui.PlotCanvas(ui.graphicsView)
 
 def browseFiles():
     fname = QFileDialog.getOpenFileName(Window1, 'Select File', 'C:\\Users')[0]
@@ -24,34 +26,62 @@ def calculate():
     x = data['X'].values
     y = data['Y'].values
 
-    plt.scatter(x,y,color='k')
-    plt.title('Relation of X and Y')
-    plt.xlabel('X')
-    plt.ylabel('Y')
-
     if ui.rbtnLin.isChecked():
+
         coeffs = np.polyfit(x,y,1)
         func = np.poly1d(coeffs)
-        plt.plot(x, func(x), 'r', label="Linear Fit")
-        ui.txtEquation.setText(str(func))
+
+        plot.figure.clf()
+        ax = plot.figure.add_subplot(111)
+        ax.scatter(x,y)
+        ax.set_title('Linear Fit')
+        ax.plot(x, func(x), 'r')
+        ax.axes.set_ylabel('Y Label')
+        ax.axes.set_xlabel('X Label')
+        plot.draw()
+
+        ui.txtEquation.setText(f'{coeffs[0]:.2f}x + {coeffs[1]:.2f}')
 
     elif ui.rbtnQuad.isChecked():
+
         coeffs = np.polyfit(x,y,2)
         func = np.poly1d(coeffs)
-        plt.plot(x, func(x), 'g', label="Quadratic Fit")
-        ui.txtEquation.setText(str(func))
+
+        plot.figure.clf()
+        ax = plot.figure.add_subplot(111)
+        ax.scatter(x,y)
+        ax.set_title('Quadratic Fit')
+        ax.plot(x, func(x), 'g')
+        ax.axes.set_ylabel('Y Label')
+        ax.axes.set_xlabel('X Label')
+        plot.draw()
+
+        ui.txtEquation.setText(f'{coeffs[0]:.2f}x^2 + {coeffs[1]:.2f}x + {coeffs[2]:.2f}')
 
     elif ui.rbtnCubic.isChecked():
+
         coeffs = np.polyfit(x,y,3)
         func = np.poly1d(coeffs)
-        plt.plot(x, func(x), 'b', label="Cubic Fit")
-        ui.txtEquation.setText(str(func))
+
+        plot.figure.clf()
+        ax = plot.figure.add_subplot(111)
+        ax.scatter(x,y)
+        ax.set_title('Cubic Fit')
+        ax.plot(x, func(x), 'k')
+        ax.axes.set_ylabel('Y Label')
+        ax.axes.set_xlabel('X Label')
+        plot.draw()
+
+        ui.txtEquation.setText(f'{coeffs[0]:.2f}x^3 + {coeffs[1]:.2f}x^2 + {coeffs[2]:.2f}x + {coeffs[3]:.2f}')
 
     elif ui.rbtnExp.isChecked():
-        coeffs = np.polyfit(x,y,3)
-        func = np.poly1d(coeffs)
-        plt.plot(x, func(x), 'b', label="Exponential Fit")
-        ui.txtEquation.setText(str(func))
+        def exponential(args):
+            A, B, C = args
+            response = A + B * np.e ** (C * x)
+            return response
+
+        print(minimize(exponential, [x,1,1,1]))    
+        # ui.txtEquation.setText(str(func))
 
     elif ui.rbtnAll.isChecked():
 
@@ -69,11 +99,7 @@ def calculate():
 
         coeffs = np.polyfit(x,y,3)
         func = np.poly1d(coeffs)
-        plt.plot(x, func(x), 'b', label="Exponential Fit")
-
-    plt.legend()
-    plt.show()
-
+        plt.plot(x, func(x), 'y', label="Exponential Fit")
 
 if __name__ == "__main__":
     Window1.show()
